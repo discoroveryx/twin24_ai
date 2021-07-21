@@ -1,0 +1,10 @@
+[flake8]
+ignore = 
+    A003,
+    # D100,
+    # E501,
+    # W605,
+    # E402
+max-complexity = 10
+max-line-length = 130
+inline-quotes = '
