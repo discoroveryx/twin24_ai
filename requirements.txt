@@ -1,0 +1,7 @@
+flake8
+flake8-quotes
+flake8-fixme
+flake8-print
+mypy
+isort
+requests==2.25.1
