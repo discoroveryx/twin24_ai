@@ -15,7 +15,7 @@ class ThrottleRequest:
 
     def __enter__(self):
         """
-        Не забываем, requests подниает собственные requests.exceptions
+        Не забываем, requests поднимает собственные requests.exceptions
         """
 
         # количество попыток -1, так как в конце метода есть return

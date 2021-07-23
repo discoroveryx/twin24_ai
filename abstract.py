@@ -2,7 +2,7 @@ from abc import ABC
 from abc import abstractmethod
 
 
-class GraphBuildder(ABC):
+class GraphBuilder(ABC):
     """Строитель графа"""
 
     @abstractmethod

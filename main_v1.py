@@ -5,12 +5,12 @@ import pprint
 from typing import Dict
 from typing import List
 
-from abstract import GraphBuildder
+from abstract import GraphBuilder
 
 pp = pprint.PrettyPrinter(indent=2, depth=10, compact=True)
 
 
-class GraphBuildderVersion1(GraphBuildder):
+class GraphBuilderVersion1(GraphBuilder):
     """
     Строитель графа
 
@@ -19,10 +19,9 @@ class GraphBuildderVersion1(GraphBuildder):
 
     Реализация:
         Распарсить json диалоги
-        Забираем намерениях с помощью стороннего сервиса sandbox.twin24.ai
+        Забираем намерения с помощью стороннего сервиса sandbox.twin24.ai
         Отсекаем первое сообщение, если это человек
         В основном обработчике складываем результат
-
     """
 
     # TODO МОМЕНТ С КОМПОЗИЦИЕЙ ПОД ВОПРОСОМ, НУЖНА АБСТРАКТНАЯ ФАБРИКА?
@@ -128,7 +127,7 @@ class GraphBuildderVersion1(GraphBuildder):
 
 
 if __name__ == '__main__':
-    graph_builder = GraphBuildderVersion1()
+    graph_builder = GraphBuilderVersion1()
 
     graph_result = graph_builder.get_graph()
 
