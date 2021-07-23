@@ -6,7 +6,7 @@ import time
 class ThrottleRequest:
     """Контекстный менеджер для обработки неудачных попыток запроса"""
 
-    def __init__(self, url_target: str, max_retry=5, time_waiting=1.5):
+    def __init__(self, url_target: str, *, max_retry=5, time_waiting=1.5):
         """Входные данные"""
 
         self.url_target = url_target  # url назначения
