@@ -30,13 +30,13 @@ class JsonFileParser:
     def _json_file_to_dict(self, filename: str) -> dict:
         """Преобразует json файл в dict"""
 
-        f = open(filename, encoding='utf-8')
+        # f = open(filename, encoding='utf-8')
+        # data = json.load(f)
+        # f.close()
 
-        data = json.load(f)
-
-        f.close()
-
-        return data
+        with open(filename, encoding='utf-8') as file:
+            data = json.load(file)
+            return data
 
     def to_list(self) -> List[List[Dict]]:
         """JSON to list"""
