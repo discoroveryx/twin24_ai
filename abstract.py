@@ -24,5 +24,5 @@ class GraphBuilder(ABC):
         """Строим граф"""
 
     @abstractmethod
-    def get_graph(self) -> list:
+    def get_graph(self):
         """Получаем граф"""

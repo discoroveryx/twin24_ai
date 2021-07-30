@@ -24,10 +24,7 @@ class GraphBuilderVersion1(GraphBuilder):
         В основном обработчике складываем результат
     """
 
-    # TODO МОМЕНТ С КОМПОЗИЦИЕЙ ПОД ВОПРОСОМ, НУЖНА АБСТРАКТНАЯ ФАБРИКА?
-    # ИЛИ ОТНОШЕНИЕ К СТОРОННИМ МОДУЛЯМ (HELPERS) ЧЕРЕЗ КОМПОЗИЦИЮ?
-
-    def _get_last_position_of_common_pipe(self, object_list):
+    def _get_last_position_of_common_pipe(self, object_list: list) -> list:
         """Получить последнию свободную позицию в общем pipe"""
 
         if object_list:
@@ -53,7 +50,7 @@ class GraphBuilderVersion1(GraphBuilder):
 
         return parser.to_list()
 
-    def pipe_get_intent(self, pipe_data: list):
+    def pipe_get_intent(self, pipe_data: list) -> list:
         """Забираем намерения"""
 
         for head in pipe_data:
