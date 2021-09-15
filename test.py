@@ -5,21 +5,21 @@ from helpers.throttle_request import ThrottleRequest
 
 
 class ThrottleTestCase(unittest.TestCase):
-    """Тест кейс контекстного менеджера ThrottleRequest"""
+    """Тест кейс контекстного менеджера ThrottleRequest."""
 
     @mock.patch('helpers.throttle_request.requests.get')
     def test_throttle(self, requests_get):
-        """Первые два запроса отдают 429, последний 200"""
+        """Первые два запроса отдают 429, последний 200."""
 
-        # подготавливаем 200 OK ответ
+        # Подготавливаем 200 OK ответ
         response_mock_200 = mock.Mock()
         response_mock_200.status_code = 200
 
-        # подготавливаем 429 Too Many Requests ответ
+        # Подготавливаем 429 Too Many Requests ответ
         response_mock_429 = mock.Mock()
         response_mock_429.status_code = 429
 
-        # два ответа 429 + один 200
+        # Два ответа 429 + один 200
         requests_get.side_effect = [response_mock_429, response_mock_429, response_mock_200]
 
         url = 'https://sandbox.twin24.ai/parse?q=здравствуйте'

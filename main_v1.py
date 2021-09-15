@@ -1,18 +1,16 @@
-from helpers.get_intent import GetIntent
-from helpers.json_parser import JsonFileParser
-
 import pprint
-from typing import Dict
-from typing import List
+from typing import Dict, List
 
 from abstract import GraphBuilder
+from helpers.get_intent import GetIntent
+from helpers.json_parser import JsonFileParser
 
 pp = pprint.PrettyPrinter(indent=2, depth=10, compact=True)
 
 
 class GraphBuilderVersion1(GraphBuilder):
     """
-    Строитель графа
+    Строитель графа.
 
     Цель:
         Построить дерево разговора для определния реакции (намерения) на фразы бота
@@ -25,12 +23,12 @@ class GraphBuilderVersion1(GraphBuilder):
     """
 
     def _get_last_position_of_common_pipe(self, object_list: list) -> list:
-        """Получить последнию свободную позицию в общем pipe"""
+        """Получить последнию свободную позицию в общем pipe."""
 
         if object_list:
             for i in object_list:
                 if 'replies' in i:
-                    # рекурсивный вызов
+                    # Рекурсивный вызов
                     res = self._get_last_position_of_common_pipe(i['replies'])
                 else:
                     res = i
@@ -40,7 +38,7 @@ class GraphBuilderVersion1(GraphBuilder):
 
     def pipe_parse(self) -> List[List[Dict]]:
         """
-        Парсим json файлы
+        Парсим json файлы.
 
         Результат:
             - общий list
@@ -51,7 +49,7 @@ class GraphBuilderVersion1(GraphBuilder):
         return parser.to_list()
 
     def pipe_get_intent(self, pipe_data: list) -> list:
-        """Забираем намерения"""
+        """Забираем намерения."""
 
         for head in pipe_data:
             for i in head:
@@ -64,7 +62,7 @@ class GraphBuilderVersion1(GraphBuilder):
         return pipe_data
 
     def pipe_normalization(self, pipe_data: list) -> list:
-        """Отсекаем первое сообщение в каждом диалоге, если это человек"""
+        """Отсекаем первое сообщение в каждом диалоге, если это человек."""
 
         for head in pipe_data:
             if head[0]['is_bot'] is False:
@@ -73,19 +71,17 @@ class GraphBuilderVersion1(GraphBuilder):
         return pipe_data
 
     def pipe_build_graph(self, pipe_data: list) -> list:
-        """Строим граф"""
+        """Строим граф."""
 
         common_pipe: list = []
 
         for head in pipe_data:
             position = 1
             for i in head:
-                # print('is_bot', i['is_bot'], position)  # noqa
-
                 if i['is_bot']:
                     tmp = {
                         'is_bot': True,
-                        'phrases': [i['text'], ],
+                        'phrases': [i['text']],
                         'replies': [],
                     }
                     if position == 1:
@@ -100,7 +96,7 @@ class GraphBuilderVersion1(GraphBuilder):
                     tmp = {
                         'is_bot': False,
                         'intent': i['intent'],
-                        'phrases': [i['text'], ],
+                        'phrases': [i['text']],
                         'replies': [],
                     }
                     if position == 2:
@@ -113,7 +109,7 @@ class GraphBuilderVersion1(GraphBuilder):
         return common_pipe
 
     def get_graph(self) -> list:
-        """Запускаем обработчик"""
+        """Запускаем обработчик."""
 
         pipe_data = self.pipe_parse()
         pipe_data = self.pipe_get_intent(pipe_data)
